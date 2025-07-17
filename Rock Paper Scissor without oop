@@ -1,0 +1,91 @@
+#include <cstdlib> // for rand()
+#include <iostream>
+using namespace std;
+
+string getComputerChoice() {
+  string choices[] = {"rock", "paper", "scissors"};
+  int index = rand() % 3;
+  return choices[index];
+}
+
+string mapCharToChoice(char c) {
+  c = tolower(c);
+  if (c == 'r')
+    return "rock";
+  if (c == 'p')
+    return "paper";
+  if (c == 's')
+    return "scissors";
+  return "";
+}
+
+string determineWinner(string player, string computer) {
+  if (player == computer)
+    return "tie";
+  if ((player == "rock" && computer == "scissors") ||
+      (player == "paper" && computer == "rock") ||
+      (player == "scissors" && computer == "paper"))
+    return "player";
+  else
+    return "computer";
+}
+
+string getResultMessage(string winner, int &playerScore, int &computerScore) {
+  if (winner == "tie") {
+    return "It's a tie";
+  } else if (winner == "player") {
+    playerScore++;
+    return "You win";
+  } else {
+    computerScore++;
+    return "You lose";
+  }
+}
+
+int main() {
+  char playerChar;
+  string playerChoice, computerChoice;
+  int playerScore = 0, computerScore = 0;
+  int rounds;
+
+  cout << "Welcome to Rock, Paper, Scissors\n";
+  cout << "Enter 'r' for rock, 'p' for paper, or 's' for scissors.\n";
+  cout << "How many rounds do you want to play? ";
+  cin >> rounds;
+
+  for (int i = 1; i <= rounds; ++i) {
+    cout << "\n--- Round " << i << " ---\n";
+
+    do {
+      cout << "Enter your choice (r/p/s): ";
+      cin >> playerChar;
+      playerChoice = mapCharToChoice(playerChar);
+
+      if (playerChoice == "")
+        cout << "Invalid input. Please enter 'r', 'p', or 's'.\n";
+
+    } while (playerChoice == "");
+
+    computerChoice = getComputerChoice();
+    cout << "Computer chose: " << computerChoice << endl;
+
+    string winner = determineWinner(playerChoice, computerChoice);
+    string result = getResultMessage(winner, playerScore, computerScore);
+    cout << result << endl;
+
+    cout << "Score - You: " << playerScore << " | Computer: " << computerScore
+         << endl;
+  }
+
+  cout << "\nGame Over! Final Score - You: " << playerScore
+       << " | Computer: " << computerScore << endl;
+
+  if (playerScore > computerScore)
+    cout << "You are the winner\n";
+  else if (playerScore < computerScore)
+    cout << "Computer wins Better luck next time.\n";
+  else
+    cout << " It's a tie overall.\n";
+
+  return 0;
+}

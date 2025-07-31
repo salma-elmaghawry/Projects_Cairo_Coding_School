@@ -15,7 +15,8 @@ public:
   }
 
   void displayMenu() {
-    cout << "\n========== Library System ==========\n";
+    cout << "\n========== Library System ==========\n"
+    ;
     cout << "1. View Available Books\n";
     cout << "2. Borrow a Book\n";
     cout << "3. Return a Book\n";
@@ -30,7 +31,8 @@ public:
       cout << "No books available.\n";
       return;
     }
-    cout << "\nAvailable Books:\n";
+    cout << "\nAvailable Books:\n"
+    ;
     for (int i = 0; i < availableBooks.size(); ++i) {
       cout << i + 1 << ". " << availableBooks[i] << "\n";
     }
@@ -41,7 +43,8 @@ public:
       cout << "You have not borrowed any books yet.\n";
       return;
     }
-    cout << "\n Your Borrowed Books:\n";
+    cout << "\n Your Borrowed Books:\n"
+    ;
     for (int i = 0; i < borrowedBooks.size(); ++i) {
       cout << i + 1 << ". " << borrowedBooks[i] << "\n";
     }
@@ -85,7 +88,7 @@ public:
 
   void addBook() {
     string bookName;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter the name of the new book: ";
     getline(cin, bookName);
 
@@ -99,11 +102,11 @@ public:
 
   void start() {
     int option;
-    for (;;) {
+    do
+      {
       displayMenu();
       cin >> option;
-
-      switch (option) {
+    switch (option) {
       case 1:
         viewAvailableBooks();
         break;
@@ -121,14 +124,14 @@ public:
         break;
       case 6:
         cout << "Thanks for using the Library System. Goodbye\n";
-        return; 
+        return;
       default:
         cout << "Invalid option. Try again.\n";
       }
     }
+    while(option !=6);
   }
 };
-
 
 int main() {
   LibrarySystem system;

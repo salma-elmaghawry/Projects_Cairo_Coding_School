@@ -1,0 +1,6 @@
+# Database files created when the apps run
+*.db
+# SQLite library files (each student downloads them, see README)
+sqlite3.c
+sqlite3.h
+sqlite3.o
